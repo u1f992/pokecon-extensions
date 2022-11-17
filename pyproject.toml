@@ -1,0 +1,11 @@
+[project]
+name = "pokecon-extensions"
+version = "0.1.0"
+description = "Poke-Controller MODIFIED向け機能拡張ライブラリ"
+authors = ["Koutaro Mukai <mukai.k1011k@outlook.jp>"]
+readme = "README.md"
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
