@@ -1,4 +1,4 @@
-from pokecon_extensions.simplifier import *
+from pokecon_extensions.simplifier import Button, Direction, Hat, Press, Print, Sequence, Wait, Match, NotMatchAction, INFINITE
 
 # コマンド名を記述します。
 NAME = "簡易自動化のテスト"
