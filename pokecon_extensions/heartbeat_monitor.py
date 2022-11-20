@@ -1,9 +1,17 @@
 from __future__ import annotations
 from logging import DEBUG, NullHandler, getLogger
-
-from threading import Event, Thread
+from threading import Thread
 from time import sleep
 from typing_extensions import Protocol
+
+
+class Event(Protocol):
+    """
+    `threading.Event`／`multiprocessing.Event`
+    """
+
+    def set(self):
+        pass
 
 
 class PythonCommand(Protocol):
