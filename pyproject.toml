@@ -5,7 +5,9 @@ description = "Poke-Controller MODIFIED向け機能拡張ライブラリ"
 readme = "README.md"
 dependencies = [
   "opencv-python",
-  "typing_extensions"
+  "typing_extensions",
+  "pyserial",
+  "pydantic"
 ]
 
 
