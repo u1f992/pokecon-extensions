@@ -12,7 +12,7 @@ from typing_extensions import Literal
 
 from serial import Serial
 
-from bluetooth_adapter import BluetoothAdapter
+from pokecon_extensions import BluetoothAdapter
 
 
 def get_serial_config(config: Path = Path(__file__).parent.joinpath("serial.cfg").resolve()) -> dict[Literal["port", "baudrate"], Any]:

@@ -1,4 +1,4 @@
-# pokecon-bluetooth-adapter
+# BluetoothAdapter
 
 Poke-Controller MODIFIED向けBluetooth自動化
 
