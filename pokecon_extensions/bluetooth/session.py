@@ -11,10 +11,10 @@ from .state import State
 
 
 class ControllerColor(BaseModel):
-    pad: int = 0xFFFFFF
-    button: int = 0xFFFFFF
-    leftgrip: int = 0xFFFFFF
-    rightgrip: int = 0xFFFFFF
+    pad: int = 0x2D2D2D
+    button: int = 0xE6E6E6
+    leftgrip: int = 0x464646
+    rightgrip: int = 0x464646
 
     @validator("pad", "button", "leftgrip", "rightgrip")
     def color_code(cls, value: int):
