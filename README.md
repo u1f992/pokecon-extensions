@@ -2,13 +2,13 @@
 
 [Poke-Controller MODIFIED](https://github.com/Moi-poke/Poke-Controller-Modified)向け機能拡張ライブラリ
 
-| 名称                | 機能                                                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `AsynchronousTimer` | 非同期タイマー（待機中に他の操作を挟み込める）を提供します。                                                 |
-| `bluetooth`  | Bluetoothを使用した無線自動化機能を提供します。[README.md](./pokecon_extensions/bluetooth/README.md) |
-| `HeartbeatMonitor`  | `PythonCommand`を監視し、中断された場合に`threading.Event`／`multiprocessing.Event`をセットします。          |
-| `Recorder`          | 録画機能を提供します。                                                                                       |
-| `simplifier`        | `PythonCommand`の簡易記法を提供します。                                                                      |
+| 名称                | 機能                                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| `AsynchronousTimer` | 非同期タイマー（待機中に他の操作を挟み込める）を提供します。                                         |
+| `bluetooth`         | Bluetoothを使用した無線自動化機能を提供します。[README.md](./pokecon_extensions/bluetooth/README.md) |
+| `HeartbeatMonitor`  | `PythonCommand`を監視し、中断された場合に`threading.Event`／`multiprocessing.Event`をセットします。  |
+| `Recorder`          | 録画機能を提供します。                                                                               |
+| `simplifier`        | `PythonCommand`の簡易記法を提供します。                                                              |
 
 ## Installation
 

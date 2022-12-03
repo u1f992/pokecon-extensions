@@ -3,17 +3,15 @@ from __future__ import annotations
 from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures.process import BrokenProcessPool
 import multiprocessing as mp
-from pathlib import Path
 from time import perf_counter
-from typing import Any
-from typing_extensions import Literal
 
 from Commands.PythonCommandBase import PythonCommand
 
+from .config import Config
 from .from_virtual_serial import from_virtual_serial
 
 
-def bluetooth(config: dict[Literal["port", "baudrate"], Any], timeout: float = 15):
+def bluetooth(config: Config):
     """
     指定されたメソッドをBluetoothで実行するデコレーター
 
@@ -24,8 +22,7 @@ def bluetooth(config: dict[Literal["port", "baudrate"], Any], timeout: float = 1
     待機中にキャンセルされた場合、最大待機秒数まで待機したのち、コマンドを停止します。
 
     Args:
-        config (Path): "serial.cfg"
-        timeout (float, optional): ペアリングの最大待機秒数。待機秒数内にペアリングされなかった場合も、メソッドは実行されます。
+        config (Config): Configオブジェクト
     """
     def _bluetooth(func):
         def _wrapper(*args, **kwargs):
@@ -37,12 +34,12 @@ def bluetooth(config: dict[Literal["port", "baudrate"], Any], timeout: float = 1
                 is_paired = manager.Event()
 
                 conn = executor.submit(from_virtual_serial,
-                                       config, timeout, is_paired, cancel)
+                                       config, is_paired, cancel)
 
                 try:
                     start_time = perf_counter()
                     print("wait for pairing...")
-                    while not is_paired.is_set() and perf_counter() < start_time + timeout:
+                    while not is_paired.is_set() and perf_counter() < start_time + config.timeout:
                         self.wait(1)
                         self.checkIfAlive()
 

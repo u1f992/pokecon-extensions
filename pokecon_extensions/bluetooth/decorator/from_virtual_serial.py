@@ -1,18 +1,15 @@
 from __future__ import annotations
 
-from configparser import ConfigParser
-from pathlib import Path
 import threading as th
-from typing import Any
-from typing_extensions import Literal
 
 from serial import Serial
 
+from .config import Config
 from ..adapter import Adapter
 from ..session import Session
 
 
-def from_virtual_serial(config: dict[Literal["port", "baudrate"], Any], timeout: int, is_paired: th.Event, cancel: th.Event):
+def from_virtual_serial(config: Config, is_paired: th.Event, cancel: th.Event):
     """
     （暫定）仮想シリアルポートドライバを経由して、PokeConの通信をBluetoothに引き渡す
 
@@ -22,7 +19,7 @@ def from_virtual_serial(config: dict[Literal["port", "baudrate"], Any], timeout:
         is_paired (th.Event): ペアリング成功を伝達するイベントオブジェクト
         cancel (th.Event): 停止用のイベントオブジェクト
     """
-    with Serial(**config, timeout=0) as ser, Session(pairing_timeout=timeout) as session, Adapter(session) as adapter:
+    with Serial(config.port, config.baudrate, timeout=0) as ser, Session(pairing_timeout=config.timeout) as session, Adapter(session) as adapter:
         is_paired.set()
         while not cancel.is_set():
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
-from enum import IntEnum, IntFlag, auto
 
+from enum import IntEnum, IntFlag, auto
 from functools import reduce
 from typing import Optional
 
