@@ -6,7 +6,7 @@ from Commands.PythonCommandBase import ImageProcPythonCommand
 from pokecon_extensions.bluetooth import bluetooth, Config
 
 
-class BluetoothAdapter(ImageProcPythonCommand):
+class BluetoothTest(ImageProcPythonCommand):
 
     NAME = "Bluetooth自動化のテスト"
     CONFIG = Config(port="COM6", baudrate=4800, timeout=30)
