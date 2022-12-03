@@ -3,12 +3,16 @@ from __future__ import annotations
 from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures.process import BrokenProcessPool
 import multiprocessing as mp
-from time import perf_counter
-
-from Commands.PythonCommandBase import PythonCommand
+from time import perf_counter, sleep
+from typing_extensions import Protocol
 
 from .config import Config
 from .from_virtual_serial import from_virtual_serial
+
+
+class PythonCommand(Protocol):
+    def checkIfAlive(self):
+        pass
 
 
 def bluetooth(config: Config):
@@ -40,10 +44,10 @@ def bluetooth(config: Config):
                     start_time = perf_counter()
                     print("wait for pairing...")
                     while not is_paired.is_set() and perf_counter() < start_time + config.timeout:
-                        self.wait(1)
+                        sleep(1)
                         self.checkIfAlive()
 
-                    self.wait(1)  # 暴発防止
+                    sleep(1)  # 暴発防止
                     func(*args, **kwargs)
 
                 finally:

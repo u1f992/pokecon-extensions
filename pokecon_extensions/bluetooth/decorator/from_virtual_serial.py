@@ -19,7 +19,7 @@ def from_virtual_serial(config: Config, is_paired: th.Event, cancel: th.Event):
         is_paired (th.Event): ペアリング成功を伝達するイベントオブジェクト
         cancel (th.Event): 停止用のイベントオブジェクト
     """
-    with Serial(config.port, config.baudrate, timeout=0) as ser, Session(pairing_timeout=config.timeout) as session, Adapter(session) as adapter:
+    with Serial(config.port, config.baudrate, timeout=0) as ser, Session(controller_color=config.conrtoller_color, pairing_timeout=config.timeout) as session, Adapter(session) as adapter:
         is_paired.set()
         while not cancel.is_set():
 

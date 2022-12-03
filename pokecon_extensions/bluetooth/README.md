@@ -22,15 +22,9 @@ Poke-Controller MODIFIED向けBluetooth自動化
 
 ## Usage
 
-PokeConのシリアルポートを仮想シリアルポートドライバ（例：[com0com](https://qiita.com/yaju/items/e5818c99857883a59033)）に設定して、`serial.cfg`に対となるポートを設定してください。
-
-```ini
-[Serial]
-port = COM6
-baudrate = 4800
-```
-
 PythonコマンドをBluetoothで実行する場合、doメソッドに`bluetooth`デコレーターを付与します。
+
+PokeConのシリアルポートを仮想シリアルポートドライバ（例：[com0com](https://qiita.com/yaju/items/e5818c99857883a59033)）に設定して、対となるポートを`Config`に設定してください。
 
 ```python
 from __future__ import annotations
@@ -38,26 +32,18 @@ from __future__ import annotations
 from Commands.Keys import Button
 from Commands.PythonCommandBase import ImageProcPythonCommand
 
-from pokecon_extensions.bluetooth import bluetooth
-
-
-_config = {
-    "config": {
-        "port": "COM6",
-        "baudrate": 4800
-    },
-    "timeout": 30
-}
+from pokecon_extensions.bluetooth import bluetooth, Config
 
 
 class BluetoothAdapter(ImageProcPythonCommand):
 
     NAME = "Bluetooth自動化のテスト"
+    CONFIG = Config(port="COM6", baudrate=4800, timeout=30)
 
     def __init__(self, cam):
         super().__init__(cam)
 
-    @bluetooth(**_config)
+    @bluetooth(CONFIG)
     def do(self):
         self.press(Button.A, 1, 1)
         self.press(Button.A, 1, 1)

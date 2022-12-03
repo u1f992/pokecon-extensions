@@ -4,8 +4,22 @@ from contextlib import AbstractContextManager
 from time import perf_counter, sleep
 from types import TracebackType
 
+from pydantic import BaseModel, validator
+
 from .btkeyLib import start, is_paired, send_button, send_stick_l, send_stick_r, shutdown
 from .state import State
+
+
+class ControllerColor(BaseModel):
+    pad: int = 0x2D2D2D
+    button: int = 0xE6E6E6
+    leftgrip: int = 0x464646
+    rightgrip: int = 0x464646
+
+    @validator("pad", "button", "leftgrip", "rightgrip")
+    def color_code(cls, value: int):
+        assert 0x0 <= value and value <= 0xFFFFFF
+        return value
 
 
 class Session(AbstractContextManager):
@@ -38,8 +52,9 @@ class Session(AbstractContextManager):
     # 3. __del__ ... タイミングは指示できないが、必ず呼ばれる
     #
 
-    def __init__(self, pairing_timeout=30) -> None:
-        start()
+    def __init__(self, controller_color=ControllerColor(), pairing_timeout=30) -> None:
+        start(controller_color.pad, controller_color.button,
+              controller_color.leftgrip, controller_color.rightgrip)
         start_time = perf_counter()
         while not is_paired() and perf_counter() < start_time + pairing_timeout:
             sleep(1)

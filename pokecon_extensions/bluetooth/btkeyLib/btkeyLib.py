@@ -20,7 +20,7 @@ __btkeyLib__.send_padcolor.argtypes = (c_uint32, c_uint32, c_uint32, c_uint32)
 __btkeyLib__.gamepad_paired.restype = c_bool
 
 
-def start(pad_color: int = 0xFFFFFF, button_color: int = 0xFFFFFF, leftgrip_color: int = 0xFFFFFF, rightgrip_color: int = 0xFFFFFF):
+def start(pad_color: int, button_color: int, leftgrip_color: int, rightgrip_color: int):
     """
     Bluetooth接続を開始するための関数
 
