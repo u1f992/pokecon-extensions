@@ -1,11 +1,47 @@
 from __future__ import annotations
+from enum import IntEnum, IntFlag, auto
 
 from functools import reduce
 from typing import Optional
 
 from pydantic import BaseModel, validator
 
-from ..btkeyLib import Button
+
+class Button(IntFlag):
+    Y = auto()
+    X = auto()
+    B = auto()
+    A = auto()
+    __SR1 = auto()
+    __SL1 = auto()
+    R = auto()
+    ZR = auto()
+    MINUS = auto()
+    PLUS = auto()
+    RCLICK = auto()
+    LCLICK = auto()
+    HOME = auto()
+    CAPTURE = auto()
+    __UNUSED = auto()
+    __CHARGING = auto()
+    DOWN = auto()
+    UP = auto()
+    RIGHT = auto()
+    LEFT = auto()
+    __SR2 = auto()
+    __SL2 = auto()
+    L = auto()
+    ZL = auto()
+
+
+class Direction(IntEnum):
+    MINIMUM = 0
+    NEUTRAL = 0x800
+    MAXIMUM = 0xFFF
+    # UP = 0xFFF
+    # DOWN = 0
+    # LEFT = 0
+    # RIGHT = 0xFFF
 
 
 TABLE_BUTTON = {
