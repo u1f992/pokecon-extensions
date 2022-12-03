@@ -41,13 +41,13 @@ from Commands.PythonCommandBase import ImageProcPythonCommand
 from pokecon_extensions.bluetooth import bluetooth
 
 
-_config = (
-    {
+_config = {
+    "config": {
         "port": "COM6",
         "baudrate": 4800
     },
-    30
-)
+    "timeout": 30
+}
 
 
 class BluetoothAdapter(ImageProcPythonCommand):
@@ -57,7 +57,7 @@ class BluetoothAdapter(ImageProcPythonCommand):
     def __init__(self, cam):
         super().__init__(cam)
 
-    @bluetooth(*_config)
+    @bluetooth(**_config)
     def do(self):
         self.press(Button.A, 1, 1)
         self.press(Button.A, 1, 1)
