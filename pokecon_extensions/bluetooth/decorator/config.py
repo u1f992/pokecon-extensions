@@ -6,6 +6,8 @@ import platform
 from pydantic import BaseModel, validator
 from serial import Serial, SerialException
 
+from ..session import ControllerColor
+
 
 def _list_ports():
     """
@@ -35,6 +37,7 @@ class Config(BaseModel):
     port: str
     baudrate: int
     timeout: int
+    conrtoller_color: ControllerColor = ControllerColor()
 
     @validator("port")
     def port_must_exist(cls, value: str):
