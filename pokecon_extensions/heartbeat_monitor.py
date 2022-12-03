@@ -54,4 +54,8 @@ class HeartbeatMonitor(Thread):
             sleep(self.__interval)
 
         self.__logger.info("death detected")
-        self.__obituary.set()
+        try:
+            self.__obituary.set()
+            self.__logger.info("obituary set")
+        except:
+            self.__logger.error("failed to set obituary")
