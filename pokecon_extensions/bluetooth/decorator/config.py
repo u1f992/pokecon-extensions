@@ -34,10 +34,25 @@ def _list_ports():
 
 
 class Config(BaseModel):
+    """
+    仮想シリアルポートを経由して、Bluetooth接続をおこなう設定
+    """
     port: str
+    """
+    PokeConに設定した仮想シリアルポートと対になるポート名
+    """
     baudrate: int
+    """
+    PokeCon側で使用しているボーレート
+    """
     timeout: int
+    """
+    ペアリングの最大待機秒数
+    """
     conrtoller_color: ControllerColor = ControllerColor()
+    """
+    コントローラーの配色（`0x0`-`0xFFFFFF`）
+    """
 
     @validator("port")
     def port_must_exist(cls, value: str):
