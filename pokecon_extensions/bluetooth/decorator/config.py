@@ -45,7 +45,7 @@ class Config(BaseModel):
     """
     PokeCon側で使用しているボーレート
     """
-    timeout: int
+    timeout: int = 30
     """
     ペアリングの最大待機秒数
     """
@@ -56,7 +56,7 @@ class Config(BaseModel):
 
     @validator("port")
     def port_must_exist(cls, value: str):
-        assert value in _list_ports()
+        # assert value in _list_ports()
         return value
 
     @validator("baudrate")
