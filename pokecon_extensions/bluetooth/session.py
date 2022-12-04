@@ -52,7 +52,7 @@ class Session(AbstractContextManager):
     # 3. __del__ ... タイミングは指示できないが、必ず呼ばれる
     #
 
-    def __init__(self, controller_color=ControllerColor(), pairing_timeout=30) -> None:
+    def __init__(self, pairing_timeout=30, controller_color=ControllerColor()) -> None:
         start(controller_color.pad, controller_color.button,
               controller_color.leftgrip, controller_color.rightgrip)
         start_time = perf_counter()
